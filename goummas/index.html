@@ -6,6 +6,11 @@
         </title>
         <link rel="stylesheet" type="text/css" href="style.css" />
         <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
+        <script>
+            window.onload = function() {
+              var context = new AudioContext();
+            }
+            </script>
     </head>
     <body>
         <div class="navbar">
@@ -13,6 +18,13 @@
                 <h1 class="headerDark">
                     MERRY GOUMMAS!
                 </h1>
+                <audio
+        controls autoplay
+        src="goommas.mp3">
+            <a href="goommas.mp3">
+                Download audio
+            </a>
+    </audio>
             </div>
         </div>
         <div class="content">
@@ -20,7 +32,7 @@
                 <div id = "home">
                     <img src="goommas.gif" width="90%">
                 </div>
-                <embed src="goommas.mp3" width="180" height="90" loop="false" autostart="true" hidden="true" />
+                
             </div>
             
         </div>
