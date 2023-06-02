@@ -131,6 +131,7 @@
                         for (let platform of platforms) {
                             if (this.collision(platform)) {
                                 this.yVelocity = -platspeed;
+                                this.x += this.xVelocity;
                                 return;
                             }
                         }
