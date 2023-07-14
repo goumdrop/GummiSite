@@ -125,7 +125,7 @@
                                         
                                         customer.name = "none";
                                         let i = Object.keys(recipes).indexOf(customer.want);
-                                        score += i+1;
+                                        score += Math.round((i+2)*level/2);
                                         mealsServed++;
                                         if (score > 2*level*level)
                                         {
@@ -513,7 +513,7 @@
 
                     function displayGame() {
                         if (time % 3000 == 0) {
-                            score -= level;
+                            score -= Math.round(level/2)+1;
                         }
                         if (score <= 0)
                         {
