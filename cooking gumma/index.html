@@ -56,7 +56,7 @@
                     var otherNames = ["select_command.png", "lets_a_goum.png"];
                     var foodNames = ["cheese", "chicken", "dough", "chocolate", "banana", "tomato"];
                     var food = {};
-                    let score = 4;
+                    let score = 4*level;
                     let mealsServed = 0;
                     var choppedFood = {};
                     var finalFood = {};
@@ -83,7 +83,8 @@
                         "banana bread": ["banana",  "chocolate", "dough"],
                         "pasta": ["dough chopped", "tomato"],
                         "pizza": ["cheese chopped", "dough", "tomato chopped"],
-                        "waste": []
+                        "melted cheese": ["cheese"],
+                        "waste":[]
                     }
                     var cookedFoods = {};
                     var cookedInstructs = {};
@@ -106,7 +107,7 @@
                         choppingSpaces.push(space);
                     }
                     function spaceBar() {
-                        console.log(player);
+                        console.log(stove);
                         if (phase == "end")
                         {
                             phase = "title";
@@ -228,28 +229,28 @@
                             direction = "move left";
                             if (phase == "game" && player.x > 100)
                             {
-                                player.x -= 2;
+                                player.x -= 3;
                             }
                         }
                         else if (event.keyCode == 39 || event.keyCode == 68) { //RIGHT
                             direction = "move right";
                             if (phase == "game" && player.x < 1000)
                             {
-                                player.x += 2;
+                                player.x += 3;
                             }
                         }
                         else if (event.keyCode == 40 || event.keyCode == 83) { //DOWN
                             direction = "jump";
                             if (phase == "game" && player.y < 400)
                             {
-                                player.y += 2;
+                                player.y += 3;
                             }
                         }
                         else if (event.keyCode == 38 || event.keyCode == 87) { //UP
                             direction = "back";
                             if (phase == "game" && player.y > 200)
                             {
-                                player.y -= 2;
+                                player.y -= 3;
                             }
                         }
                         else if (event.keyCode == 27) {
@@ -285,6 +286,7 @@
                         cookedFoods[name + " cooked"] = new Image(32, 32);
                         cookedFoods[name + " cooked"].src = "./foods/finished products/" + name +".png";
                     }
+                    delete cookedFoods["waste"];
                     for (let name of Object.keys(recipes))
                     {
                         if (name == "waste")
@@ -444,7 +446,7 @@
                         if (customer.name == selected_character || customer.name == "none") {
                             let num = Math.floor(Math.random() * characterNames.length)
                             customer.name = characterNames[num];
-                            customer.want = Object.keys(recipes)[Math.round((1-Math.random()*Math.random())*(level-1))];
+                            customer.want = Object.keys(recipes)[Math.round((1-Math.random()*Math.sqrt(Math.random()))*(level-1))];
                             return;
                         }
                         displayCharacter(customer.name, customer.x, customer.y);
@@ -512,8 +514,8 @@
                     }
 
                     function displayGame() {
-                        if (time % 3000 == 0) {
-                            score -= Math.round(level/2)+1;
+                        if (time % 2000 == 0) {
+                            score -= level;
                         }
                         if (score <= 0)
                         {
