@@ -41,7 +41,17 @@
                     var player = { chopped: false };
 
                     var time, interval;
-                    var characterNames = ["ducky", "pinky", "marshmellow", "harry", "egg", "egg ladle", "egg noir", "goom card revoked", "egg virologist", "tankie summi", "hal", "hal noir", "assembly hal", "heal goomling", "lint goomling", "taste goomling", "milk", "milk noir", "yllier", "oak", "oak noir", "curtle", "pickleeni", "pirate gum", "gumdrop", "toomi gumling", "sum", "tickles", "ticklette", "flowers"]
+                    var characterNames = ["ducky", "pinky", "marshmellow", "harry", 
+                    "egg", "egg ladle", "egg noir", "goom card revoked", "egg virologist", "tankie summi", "egg spikey",
+                    "hal", "hal noir", "assembly hal", 
+                    "heal goomling", "lint goomling", "taste goomling", 
+                    "milk", "milk noir", "yllier", 
+                    "oak", "oak noir", "oak pajamas",
+                    "curtle", "pickleeni", "kitty",
+                    "pirate gum", "gumdrop", "toomi gumling", "bitey gum",
+                    "sum", 
+                    "tickles", "ticklette", 
+                    "flowers"]
                     var movementNames = ["jump1.png", "jump2.png", "jump3.png", "jump4.png",
                         "move left1.png", "move left2.png", "move left3.png", "move left4.png",
                         "move right1.png", "move right2.png", "move right3.png", "move right4.png",
@@ -331,7 +341,7 @@
                             let clickx = event.x;
                             let clicky = event.y;
                             let gap = 100;
-                            let yOffset = 130;
+                            let yOffset = 64;
                             i = 0;
                             for (var character of characterNames) {
                                 let x = (gap * i) % (canvaswidth - 2 * gap) + gap;
@@ -405,7 +415,7 @@
 
                     function displayTitle() {
                         let gap = 100;
-                        let yOffset = 130;
+                        let yOffset = 64;
                         player.y = 200;
                         player.x = 60;
                         player.inventory = "none";
@@ -420,8 +430,8 @@
                             displayCharacter(character, x, y);
                             i++;
                         }
-                        ctx.drawImage(title["title" + titleframe + ".png"], 64, 64, 1024, 128);
-                        ctx.drawImage(others["select_command.png"], 400 + 2 * (Math.floor(titleframe / 3)), 512, 512, 64);
+                        ctx.drawImage(title["title" + titleframe + ".png"], 64, 10, 1024, 128);
+                        ctx.drawImage(others["select_command.png"], 400 + 2 * (Math.floor(titleframe / 3)), 532, 512, 64);
                     }
 
                     function displayStarting() {
