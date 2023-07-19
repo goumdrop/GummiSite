@@ -41,18 +41,22 @@
                     var player = { chopped: false };
 
                     var time, interval;
-                    var characterNames = ["ducky", "pinky", "marshmellow", "harry", 
+                    var characterNames = [
                     "egg", "egg ladle", "egg noir", "goom card revoked", "egg virologist", "tankie summi", "egg spikey",
                     "hal", "hal noir", "assembly hal", 
                     "heal goomling", "lint goomling", "taste goomling", 
-                    "milk", "milk noir", "yllier", "milk swim",
+                    "milk", "milk noir", "yllier", "milk swim",                    
                     "oak", "oak noir", "oak pajamas",
+                    "ducky", "pinky", "marshmellow", "harry", 
                     "curtle", "pickleeni", 
-                    "kitty", "kitty woolly mamoth",
+                    
                     "pirate gum", "gumdrop", "toomi gumling", "bitey gum",
                     "sum", 
+                    "kitty", "kitty woolly mamoth",
                     "tickles", "ticklette", 
-                    "flowers"]
+                    "flowers",
+                    "sumshine person", "ice cream"
+                ]
                     var movementNames = ["jump1.png", "jump2.png", "jump3.png", "jump4.png",
                         "move left1.png", "move left2.png", "move left3.png", "move left4.png",
                         "move right1.png", "move right2.png", "move right3.png", "move right4.png",
@@ -463,7 +467,7 @@
                         if (customer.name == selected_character || customer.name == "none") {
                             let num = Math.floor(Math.random() * characterNames.length)
                             customer.name = characterNames[num];
-                            customer.want = Object.keys(recipes)[Math.round((1-Math.random()*Math.sqrt(Math.random()))*(level-1))];
+                            customer.want = Object.keys(recipes)[(Math.round((1-Math.random()*Math.sqrt(Math.random()))*(level-1)))%Object.keys(recipes).length];
                             return;
                         }
                         displayCharacter(customer.name, customer.x, customer.y);
