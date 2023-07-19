@@ -45,7 +45,7 @@
                     "egg", "egg ladle", "egg noir", "goom card revoked", "egg virologist", "tankie summi", "egg spikey",
                     "hal", "hal noir", "assembly hal", 
                     "heal goomling", "lint goomling", "taste goomling", 
-                    "milk", "milk noir", "yllier", 
+                    "milk", "milk noir", "yllier", "milk swim",
                     "oak", "oak noir", "oak pajamas",
                     "curtle", "pickleeni", 
                     "kitty", "kitty woolly mamoth",
@@ -265,7 +265,13 @@
                             }
                         }
                         else if (event.keyCode == 27) {
-                            phase = "title";
+                            if (phase == "game")
+                            {
+                                phase = "end";
+                            }
+                            else {
+                                phase = "title";
+                            }
                         }
                         else if (event.keyCode == 32) {
                             spaceBar();
