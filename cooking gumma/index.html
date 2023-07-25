@@ -42,18 +42,20 @@
 
                     var time, interval;
                     var characterNames = [
-                    "egg", "egg ladle", "egg noir", "goom card revoked", "egg virologist", "tankie summi", "egg spikey",
+                    "egg", "egg ladle", "egg noir", "goom card revoked", "egg virologist", "tankie summi", "egg spikey", "egg penguin",
+                    "tickles", "ticklette", 
                     "hal", "hal noir", "assembly hal", 
-                    "heal goomling", "lint goomling", "taste goomling", 
-                    "milk", "milk noir", "yllier", "milk swim",                    
-                    "oak", "oak noir", "oak pajamas",
+                   
+                    "milk", "milk noir", "yllier", "milk swim", "milk penguin",
+                    "curtle", "pickleeni",                    
+                    
                     "ducky", "pinky", "marshmellow", "harry", 
-                    "curtle", "pickleeni", 
+                    "kitty", "kitty woolly mamoth",
                     
                     "pirate gum", "gumdrop", "toomi gumling", "bitey gum",
                     "sum", 
-                    "kitty", "kitty woolly mamoth",
-                    "tickles", "ticklette", 
+                    "heal goomling", "lint goomling", "taste goomling", 
+                    "oak", "oak noir", "oak pajamas",
                     "flowers",
                     "sumshine person", "ice cream"
                 ]
@@ -307,7 +309,7 @@
                         cookedFoods[name + " cooked"] = new Image(32, 32);
                         cookedFoods[name + " cooked"].src = "./foods/finished products/" + name +".png";
                     }
-                    delete cookedFoods["waste"];
+                    delete recipes["waste"];
                     for (let name of Object.keys(recipes))
                     {
                         if (name == "waste")
