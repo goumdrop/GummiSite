@@ -72,7 +72,12 @@
                     var otherNames = ["select_command.png", "lets_a_goum.png"];
                     var foodNames = ["cheese", "chicken", "dough", "chocolate", "banana", "tomato"];
                     var food = {};
-                    let score = 4 * level;
+                    var level = 1;
+                    if (localStorage.getItem("level") != null)
+                    {
+                        level = localStorage.getItem("level");
+                    }
+                    let score = 4 + level;
                     let mealsServed = 0;
                     var choppedFood = {};
                     var finalFood = {};
@@ -80,7 +85,6 @@
                     var characters = {};
                     var title = {};
                     var others = {};
-                    var level = 1;
                     var phase = "title";
                     var direction = "jump";
                     var selected_character = "none";
@@ -149,6 +153,7 @@
                                         mealsServed++;
                                         if (score > 2 * level * level) {
                                             level++;
+                                            localStorage.setItem("level", level)
                                         }
                                     }
                                     else {
