@@ -24,7 +24,6 @@
         p {
             font-family: sans-serif;
         }
-
     </style>
 </head>
 
@@ -42,23 +41,23 @@
 
                     var time, interval;
                     var characterNames = [
-                    "egg", "egg ladle", "egg noir", "goom card revoked", "egg virologist", "tankie summi", "egg spikey", "egg penguin",
-                    "tickles", "ticklette", 
-                    "hal", "hal noir", "assembly hal", 
-                   
-                    "milk", "milk noir", "yllier", "milk swim", "milk penguin",
-                    "curtle", "pickleeni",                    
-                    
-                    "ducky", "pinky", "marshmellow", "harry", 
-                    "kitty", "kitty woolly mamoth",
-                    
-                    "pirate gum", "gumdrop", "toomi gumling", "bitey gum",
-                    "sum", 
-                    "heal goomling", "lint goomling", "taste goomling", 
-                    "oak", "oak noir", "oak pajamas",
-                    "flowers",
-                    "sumshine person", "ice cream"
-                ]
+                        "egg", "egg ladle", "egg noir", "goom card revoked", "egg virologist", "tankie summi", "egg spikey", "egg penguin",
+                        "tickles", "ticklette",
+                        "hal", "hal noir", "assembly hal",
+
+                        "milk", "milk noir", "yllier", "milk swim", "milk penguin",
+                        "curtle", "pickleeni",
+
+                        "ducky", "pinky", "marshmellow", "harry",
+                        "kitty", "kitty woolly mamoth",
+
+                        "pirate gum", "gumdrop", "toomi gumling", "bitey gum",
+                        "sum",
+                        "heal goomling", "lint goomling", "taste goomling",
+                        "oak", "oak noir", "oak pajamas",
+                        "flowers",
+                        "sumshine person", "ice cream"
+                    ]
                     var movementNames = ["jump1.png", "jump2.png", "jump3.png", "jump4.png",
                         "move left1.png", "move left2.png", "move left3.png", "move left4.png",
                         "move right1.png", "move right2.png", "move right3.png", "move right4.png",
@@ -73,7 +72,7 @@
                     var otherNames = ["select_command.png", "lets_a_goum.png"];
                     var foodNames = ["cheese", "chicken", "dough", "chocolate", "banana", "tomato"];
                     var food = {};
-                    let score = 4*level;
+                    let score = 4 * level;
                     let mealsServed = 0;
                     var choppedFood = {};
                     var finalFood = {};
@@ -90,6 +89,13 @@
                         x: 1070,
                         y: 90
                     }
+                    var thief = {
+                        name: "none",
+                        food: "none",
+                        cooldown: 0,
+                        x: 1300,
+                        y: 120
+                    }
                     var stove = [];
                     var foodSpaces = [];
                     var recipes = {
@@ -97,11 +103,11 @@
                         "chicken nugget": ["chicken chopped"],
                         "chicken sandwich": ["chicken", "dough"],
                         "donut": ["chocolate", "dough"],
-                        "banana bread": ["banana",  "chocolate", "dough"],
+                        "banana bread": ["banana", "chocolate", "dough"],
                         "pasta": ["dough chopped", "tomato"],
                         "pizza": ["cheese chopped", "dough", "tomato chopped"],
                         "melted cheese": ["cheese"],
-                        "waste":[]
+                        "waste": []
                     }
                     var cookedFoods = {};
                     var cookedInstructs = {};
@@ -125,33 +131,27 @@
                     }
                     function spaceBar() {
                         console.log(stove);
-                        if (phase == "end")
-                        {
+                        if (phase == "end") {
                             phase = "title";
                         }
                         if (phase == "game") {
                             if (player.y <= 200) {
-                                if (player.x <= 170)
-                                {
+                                if (player.x <= 170) {
                                     player.chopped = false;
                                     player.inventory = "none";
                                 }
-                                if (player.x >= 920)
-                                {
-                                    if (customer.want + " cooked" == player.inventory)
-                                    {
-                                        
+                                if (player.x >= 920) {
+                                    if (customer.want + " cooked" == player.inventory) {
+
                                         customer.name = "none";
                                         let i = Object.keys(recipes).indexOf(customer.want);
-                                        score += Math.round((i+2)*level/2);
+                                        score += Math.round((i + 2) * level / 2);
                                         mealsServed++;
-                                        if (score > 2*level*level)
-                                        {
+                                        if (score > 2 * level * level) {
                                             level++;
                                         }
                                     }
-                                    else
-                                    {
+                                    else {
                                         score -= level;
                                     }
                                     player.chopped = false;
@@ -244,35 +244,30 @@
                         }
                         if (event.keyCode == 37 || event.keyCode == 65) { //LEFT
                             direction = "move left";
-                            if (phase == "game" && player.x > 100)
-                            {
+                            if (phase == "game" && player.x > 100) {
                                 player.x -= 3;
                             }
                         }
                         else if (event.keyCode == 39 || event.keyCode == 68) { //RIGHT
                             direction = "move right";
-                            if (phase == "game" && player.x < 1000)
-                            {
+                            if (phase == "game" && player.x < 1000) {
                                 player.x += 3;
                             }
                         }
                         else if (event.keyCode == 40 || event.keyCode == 83) { //DOWN
                             direction = "jump";
-                            if (phase == "game" && player.y < 400)
-                            {
+                            if (phase == "game" && player.y < 400) {
                                 player.y += 3;
                             }
                         }
                         else if (event.keyCode == 38 || event.keyCode == 87) { //UP
                             direction = "back";
-                            if (phase == "game" && player.y > 200)
-                            {
+                            if (phase == "game" && player.y > 200) {
                                 player.y -= 3;
                             }
                         }
                         else if (event.keyCode == 27) {
-                            if (phase == "game")
-                            {
+                            if (phase == "game") {
                                 phase = "end";
                             }
                             else {
@@ -304,20 +299,17 @@
                         choppedFood[name] = new Image(32, 32);
                         choppedFood[name].src = "./foods/" + name + "/" + name + " chopped.png";
                     }
-                    for (let name of Object.keys(recipes))
-                    {
+                    for (let name of Object.keys(recipes)) {
                         cookedFoods[name + " cooked"] = new Image(32, 32);
-                        cookedFoods[name + " cooked"].src = "./foods/finished products/" + name +".png";
+                        cookedFoods[name + " cooked"].src = "./foods/finished products/" + name + ".png";
                     }
                     delete recipes["waste"];
-                    for (let name of Object.keys(recipes))
-                    {
-                        if (name == "waste")
-                        {
+                    for (let name of Object.keys(recipes)) {
+                        if (name == "waste") {
                             break;
                         }
                         cookedInstructs[name] = new Image(320, 48);
-                        cookedInstructs[name].src = "./foods/finished products/" + name +" instruct.png";
+                        cookedInstructs[name].src = "./foods/finished products/" + name + " instruct.png";
                     }
                     var environment = new Image(1200, 600);
                     environment.src = "./environment/environment.png";
@@ -425,6 +417,70 @@
                             ctx.drawImage(food[foodname], 1025 + i, 540);
                         }
                     }
+                    function displayThief() {
+                        if (thief.name == selected_character || thief.name == "none" || customer.name == thief.name) {
+                            let num = Math.floor(Math.random() * characterNames.length)
+                            thief.name = characterNames[num];
+                            thief.food = Object.keys(recipes)[(Math.round((1 - Math.random() * Math.sqrt(Math.random())) * (level + 1))) % Object.keys(recipes).length] + " cooked";
+                            return;
+                        }
+                        if (thief.cooldown > 0)
+                        {
+                            thief.cooldown--;
+                        }
+                        let ctx = gameCanvas.context;
+                        
+                        let foodname = thief.food;
+                        if (thief.cooldown == 0 && Math.abs(thief.x - player.x) <= 80 && Math.abs(thief.y - player.y) <= 80) {
+                            if (foodname.includes(" cooked")) {
+                                player.inventory = foodname
+                                player.chopped = false;
+                            }
+                            else if (foodname.includes(" chopped")) {
+                                player.inventory = foodname.substring(0, foodname.indexOf(" chopped"));
+                                player.chopped = true;
+                            }
+                            else {
+                                player.inventory = foodname;
+                                player.chopped = false;
+                            }
+                            thief.food = "none";
+                            thief.cooldown = 150;
+                        }
+                        foodname = thief.food;
+                        if (level < 5)
+                        {
+                            return;
+                        }
+                        if (thief.x <= 90 && thief.y >= 140) {
+                            thief.y--;
+                        }
+                        if (thief.x <= 1300 && thief.y <= 140) {
+                            thief.x++;
+                        }
+                        if (thief.x >= 1300 && thief.y <= 400) {
+                            thief.y++;
+                        }
+                        if (thief.x >= 90 && thief.y >= 400) {
+                            thief.x--;
+                            if (thief.x >= 1299) {
+                                thief.name = "none";
+                                return;
+                            }
+                        }
+                        displayCharacter(thief.name, thief.x, thief.y);
+                        if (foodname == "none")
+                            return;
+                        if (foodname.includes(" cooked")) {
+                            ctx.drawImage(cookedFoods[foodname], thief.x + 10, thief.y - 20);
+                            return;
+                        }
+                        if (foodname.includes(" chopped")) {
+                            ctx.drawImage(choppedFood[foodname.substring(0, foodname.indexOf(" chopped"))], thief.x + 10, thief.y - 20);
+                            return;
+                        }
+                        ctx.drawImage(food[foodname], thief.x + 10, thief.y - 20);
+                    }
 
                     function displayTitle() {
                         let gap = 100;
@@ -469,11 +525,11 @@
                         if (customer.name == selected_character || customer.name == "none") {
                             let num = Math.floor(Math.random() * characterNames.length)
                             customer.name = characterNames[num];
-                            customer.want = Object.keys(recipes)[(Math.round((1-Math.random()*Math.sqrt(Math.random()))*(level-1)))%Object.keys(recipes).length];
+                            customer.want = Object.keys(recipes)[(Math.round((1 - Math.random() * Math.sqrt(Math.random())) * (level - 1))) % Object.keys(recipes).length];
                             return;
                         }
                         displayCharacter(customer.name, customer.x, customer.y);
-                        
+
                     }
                     function displayPlayer() {
                         displayCharacter(selected_character, player.x, player.y);
@@ -501,8 +557,7 @@
                         }
                         if (player.inventory != "none") {
                             let ctx = gameCanvas.context;
-                            if (player.inventory.includes(" cooked"))
-                            {
+                            if (player.inventory.includes(" cooked")) {
                                 ctx.drawImage(cookedFoods[player.inventory], player.x + 10, player.y - 20);
                             }
                             else if (player.chopped) {
@@ -521,18 +576,17 @@
                             ctx.drawImage(food[foodNames[i]], 370 - i * 68, 540);
                         }
                         //let ctx = gameCanvas.context;
-                        ctx.drawImage(cookedInstructs[customer.want], customer.x-325, customer.y);
+                        ctx.drawImage(cookedInstructs[customer.want], customer.x - 325, customer.y);
                     }
 
                     function displayEnd() {
-                        if (time%500 == 0)
-                        {
+                        if (time % 500 == 0) {
                             phase = "title";
                         }
                         let ctx = gameCanvas.context;
                         ctx.font = "100px 'VT323'";
-                                          ctx.fillStyle = "#78ff9c";
-                                        ctx.fillText("YOU SERVED " + mealsServed + " GOUMS!", 250, 250);
+                        ctx.fillStyle = "#78ff9c";
+                        ctx.fillText("YOU SERVED " + mealsServed + " GOUMS!", 250, 250);
                         displayCharacter(selected_character, 584, 440);
                     }
 
@@ -540,25 +594,25 @@
                         if (time % 2000 == 0) {
                             score -= level;
                         }
-                        if (score <= 0)
-                        {
+                        if (score <= 0) {
                             phase = "end";
                             time = 0;
                         }
-                        
-                        
+
+
                         let ctx = gameCanvas.context;
                         ctx.drawImage(environment, 0, 0);
                         displayCustomer();
                         ctx.drawImage(front, 0, 0);
+                        displayThief();
                         displayPlayer();
                         ctx.drawImage(fronter, 0, 0);
                         displayFoods();
                         displayChoppings();
                         displayStove();
                         ctx.font = "40px 'VT323'";
-                                          ctx.fillStyle = "black";
-                                        ctx.fillText("HP:" + score, 50, 50);
+                        ctx.fillStyle = "black";
+                        ctx.fillText("HP:" + score, 50, 50);
                     }
 
 
@@ -575,8 +629,7 @@
                         else if (phase == "game") {
                             displayGame();
                         }
-                        else if (phase == "end")
-                        {
+                        else if (phase == "end") {
                             displayEnd();
                         }
                         time += 1;
